@@ -1,0 +1,11 @@
+# Generated and vendor code
+node_modules
+src/vendor
+src/css
+dist
+.grunt
+
+# Ignore testing code
+_SpecRunner.html
+test-compiled
+junit
