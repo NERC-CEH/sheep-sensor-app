@@ -16,7 +16,8 @@ require.config({
     'c3': '../vendor/c3/c3',
     'cs': '../vendor/require-cs/cs',
     'coffee-script': '../vendor/coffee-script/extras/coffee-script',
-    'gauge': '../vendor/gauge/src/gauge'
+    'gauge': '../vendor/gauge/src/gauge',
+    'chartjs': '../vendor/chartjs/Chart'
   },
   waitSeconds:1000
 }); 

@@ -1,16 +1,16 @@
 define [
   "jquery"
   "backbone"
-  "tpl!templates/GaugeScaffold.tpl"
+  "tpl!templates/GaugeScaffolding.tpl"
   "gauge"
-], ($, Backbone, gaugeScaffold, Gauge) -> Backbone.View.extend
+], ($, Backbone, scaffolding, Gauge) -> Backbone.View.extend
 
   initialize: ->
     do @render
     do @gauge
 
   render: -> 
-    @$el.html gaugeScaffold()
+    @$el.html scaffolding()
 
   gauge: ->
     gauge = new Gauge @$('#gauge')[0], {'arcColor': 'green'}

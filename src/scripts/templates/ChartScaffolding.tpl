@@ -1,0 +1,1 @@
+<canvas id="archive-chart" width="500" height="200"></canvas>
