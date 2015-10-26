@@ -1,8 +1,8 @@
 require.config({
-  stubModules: ['tpl', 'json'],
+  stubModules: ['tpl', 'json', 'cs'],
   shim: {
-    'leaflet': {exports: 'L'},
-    'bootstrap': { deps: ['jquery']}
+    'bootstrap': { deps: ['jquery']},
+    'gauge': { exports: 'Gauge'}
   },
   paths: {
     'bootstrap': '../vendor/bootstrap/dist/js/bootstrap.min',
@@ -13,12 +13,12 @@ require.config({
     'underscore': '../vendor/underscore/underscore',
     'backbone': '../vendor/backbone/backbone',
     'd3': '../vendor/d3/d3',
-    'c3': '../vendor/c3/c3'
+    'c3': '../vendor/c3/c3',
+    'cs': '../vendor/require-cs/cs',
+    'coffee-script': '../vendor/coffee-script/extras/coffee-script',
+    'gauge': '../vendor/gauge/src/gauge'
   },
   waitSeconds:1000
 }); 
 
-require(['models/App', 'views/AppView'], function(App, AppView){ 
-  app = new App();
-  view = new AppView({model: app});
-});
+require(['cs!Main'], function(){});
