@@ -5,14 +5,33 @@ define [
   "gauge"
 ], ($, Backbone, scaffolding, Gauge) -> Backbone.View.extend
 
+  events:
+    'click': 'updatePollutionRisk'
+
   initialize: ->
     do @render
-    do @gauge
+    @listenTo @model, 'change:pollutionRisk', @render
 
   render: -> 
-    @$el.html scaffolding()
+    @$el.html scaffolding
+      risk: @riskInfo()
+    do @addGauge
 
-  gauge: ->
-    gauge = new Gauge @$('#gauge')[0], {'arcColor': 'green'}
-    gauge.render([0, 20, 40, 60, 80, 100], 60, 80)
-    gauge.renderValue(33)
+  addGauge: ->
+    @gauge = new Gauge @$('#gauge')[0], {'arcColor': 'green'}
+    @gauge.render([0, 0.2, 0.4, 0.6, 0.8, 1.0], 0.6, 0.8)
+    @gauge.renderValue(@model.get 'pollutionRisk')
+
+  riskInfo: ->
+    if @model.get('pollutionRisk') > 0.8
+      'text': 'HIGH'
+      'class': 'alert-danger'
+    else if @model.get('pollutionRisk') > 0.6
+      'text': 'MEDIUM'
+      'class': 'alert-warning'
+    else if @model.get('pollutionRisk') <= 0.6
+      'text': 'LOW'
+      'class': 'alert-info'
+
+  updatePollutionRisk: ->
+    @model.set 'pollutionRisk', 0.82

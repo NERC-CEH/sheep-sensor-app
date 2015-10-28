@@ -14,10 +14,24 @@ define [
   render: ->
     @$el.html scaffolding()
     
-    @chart = new ChartView
-      model: @model
-      el: @$('#archive')
-    
     @gauge = new GaugeView
       model: @model
       el: @$('#current')
+    
+    @rainfall = new ChartView
+      model: @model.rainfallData
+      el: @$('#rainfall')
+      title: "Rainfall in last 24 hours (mm/hour)"
+      img: 'rain'
+    
+    @moisture = new ChartView
+      model: @model.moistureData
+      el: @$('#moisture')
+      title: "Soil moisture  in last 24 hours (mean %/hour)"
+      img: 'moisture'
+    
+    @sheep = new ChartView
+      model: @model.sheepData
+      el: @$('#sheep')
+      title: "Sheep in high risk areas during last 24 hours (min/hour)"
+      img: 'sheep'

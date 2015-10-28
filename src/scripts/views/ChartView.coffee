@@ -5,25 +5,45 @@ define [
   "chartjs"
 ], ($, Backbone, scaffolding, Chart) -> Backbone.View.extend
 
-  initialize: ->
+  initialize: (options) ->
+    @options = options
     do @render
     do @chart
 
   render: -> 
-    @$el.html scaffolding()
+    @$el.html scaffolding @options
 
   chart: ->
+    Chart.defaults.global.responsive = false
     ctx = @$('#archive-chart')[0].getContext("2d")
 
     data = 
-      labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+      labels: @labels()
       datasets: [
-        label: "My First dataset",
+        label: "Pollution runoff risk",
         fillColor: "rgba(151,187,205,0.5)",
         strokeColor: "rgba(151,187,205,0.8)",
         highlightFill: "rgba(151,187,205,0.75)",
         highlightStroke: "rgba(151,187,205,1)",
-        data: [28, 48, 40, 19, 86, 27, 90]
+        barDatasetSpacing: 1;
+        data: @data()
       ]
 
-    new Chart(ctx).Bar(data)
+    new Chart(ctx).Bar(data, {"barValueSpacing": 1})
+
+  labels: ->
+    _.chain @model
+      .sortBy (val) ->
+        val.time
+      .pluck 'time'
+      .map (val) ->
+        val.substring(11,13)
+      .value()
+
+  data: ->
+    _.chain @model
+      .sortBy (val) ->
+        val.time
+      .pluck 'value'
+      .value()
+
