@@ -15,7 +15,7 @@ define [
 
   chart: ->
     Chart.defaults.global.responsive = false
-    ctx = @$('#archive-chart')[0].getContext("2d")
+    ctx = @$('.chart canvas')[0].getContext("2d")
 
     data = 
       labels: @labels()
@@ -29,7 +29,7 @@ define [
         data: @data()
       ]
 
-    new Chart(ctx).Bar(data, {"barValueSpacing": 1})
+    new Chart(ctx).Bar(data, {"barValueSpacing": 0})
 
   labels: ->
     _.chain @model

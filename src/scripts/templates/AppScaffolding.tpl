@@ -1,14 +1,15 @@
-<div id="sheep-pollutant" class="container">
-  <div class="row">
-    <div id="current" class="col-md-12"></div>
+<div id="sheep-pollutant">
+  <div class="row" id="risk">
   </div>
   <div class="row">
-    <div id="sheep" class="col-md-12"></div>
+    <div class="col-lg-6">
+      <div id="sheep"></div>
+    </div>
+    <div class="col-lg-6">
+      <div id="rainfall"></div>
+    </div>
   </div>
   <div class="row">
-    <div id="rainfall" class="col-md-12"></div>
-  </div>
-  <div class="row">
-    <div id="moisture" class="col-md-12"></div>
+    <div id="moisture" class="col-lg-6"></div>
   </div>
 </div>

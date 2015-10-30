@@ -1,9 +1,10 @@
 define [
   "jquery"
   "backbone"
-  "tpl!templates/GaugeScaffolding.tpl"
+  "tpl!templates/RiskScaffolding.tpl"
+  "views/ChartView"
   "gauge"
-], ($, Backbone, scaffolding, Gauge) -> Backbone.View.extend
+], ($, Backbone, scaffolding, ChartView, Gauge) -> Backbone.View.extend
 
   events:
     'click': 'updatePollutionRisk'
@@ -16,22 +17,32 @@ define [
     @$el.html scaffolding
       risk: @riskInfo()
     do @addGauge
+    do @addChart
 
   addGauge: ->
     @gauge = new Gauge @$('#gauge')[0], {'arcColor': 'green'}
     @gauge.render([0, 0.2, 0.4, 0.6, 0.8, 1.0], 0.6, 0.8)
     @gauge.renderValue(@model.get 'pollutionRisk')
 
+  addChart: ->
+    riskInfo = @riskInfo()
+    @chart = new ChartView
+      model: @model.pollutionRiskData
+      el: @$('#risk-chart')
+      title: "Pollution risk in last 24 hours (mm/hour)"
+      img: 'sheep'
+      panelType: riskInfo.panelType
+
   riskInfo: ->
     if @model.get('pollutionRisk') > 0.8
       'text': 'HIGH'
-      'class': 'alert-danger'
+      'panelType': 'danger'
     else if @model.get('pollutionRisk') > 0.6
       'text': 'MEDIUM'
-      'class': 'alert-warning'
+      'panelType': 'warning'
     else if @model.get('pollutionRisk') <= 0.6
       'text': 'LOW'
-      'class': 'alert-info'
+      'panelType': 'info'
 
   updatePollutionRisk: ->
-    @model.set 'pollutionRisk', 0.82
+    @model.set 'pollutionRisk', Math.random()
