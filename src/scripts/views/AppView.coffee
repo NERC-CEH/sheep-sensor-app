@@ -37,3 +37,10 @@ define [
       title: "Sheep in high risk areas during last 24 hours (min/hour)"
       img: 'sheep'
       panelType: 'success'
+
+    @forecasts = new ChartView
+      model: @model.forecasts
+      el: @$('#forecasts')
+      title: "Rainfall forecast for next 24 hours (mm/3 hours)"
+      img: 'rain'
+      panelType: 'success'

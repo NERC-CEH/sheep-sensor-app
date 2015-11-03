@@ -14,33 +14,47 @@ define [
     @listenTo @model, 'change:pollutionRisk', @render
 
   render: -> 
-    @$el.html scaffolding
-      risk: @riskInfo()
-    do @addGauge
-    do @addChart
+    @riskText = 
+      riskCurrent: @riskInfo(@model.get('pollutionRisk'))
+      riskForecast: @riskInfo(@model.get('pollutionRiskForecast'))
 
-  addGauge: ->
-    @gauge = new Gauge @$('#gauge')[0], {'arcColor': 'green'}
+    @$el.html scaffolding @riskText
+    do @addGauges
+    do @addCharts
+
+  addGauges: ->
+    @gauge = new Gauge @$('#gauge-current')[0], {'arcColor': 'green'}
     @gauge.render([0, 0.2, 0.4, 0.6, 0.8, 1.0], 0.6, 0.8)
     @gauge.renderValue(@model.get 'pollutionRisk')
 
-  addChart: ->
-    riskInfo = @riskInfo()
-    @chart = new ChartView
+    randomPollutionRisk = Math.random()
+    @gauge = new Gauge @$('#gauge-future')[0], {'arcColor': 'green'}
+    @gauge.render([0, 0.2, 0.4, 0.6, 0.8, 1.0], 0.6, 0.8)
+    @gauge.renderValue(@model.get 'pollutionRiskForecast')
+
+  addCharts: ->
+    @chartForecast = new ChartView
       model: @model.pollutionRiskData
       el: @$('#risk-chart')
-      title: "Pollution risk in last 24 hours (mm/hour)"
+      title: "Pollution risk in last 24 hours"
       img: 'sheep'
-      panelType: riskInfo.panelType
+      panelType: @riskText.riskCurrent.panelType
 
-  riskInfo: ->
-    if @model.get('pollutionRisk') > 0.8
+    @chartPast = new ChartView
+      model: @model.pollutionRiskData
+      el: @$('#future-risk-chart')
+      title: "Predicted pollution risk for next 24 hours"
+      img: 'sheep'
+      panelType: @riskText.riskForecast.panelType
+
+  riskInfo: (val) ->
+    if val > 0.8
       'text': 'HIGH'
       'panelType': 'danger'
-    else if @model.get('pollutionRisk') > 0.6
+    else if val > 0.6
       'text': 'MEDIUM'
       'panelType': 'warning'
-    else if @model.get('pollutionRisk') <= 0.6
+    else if val <= 0.6
       'text': 'LOW'
       'panelType': 'info'
 

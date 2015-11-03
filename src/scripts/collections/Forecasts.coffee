@@ -24,5 +24,4 @@ define [
           "time": time.toISOString()
           "value": forecast.Pp
         time.setHours(time.getHours() + 3)
-    _.sortBy forecasts, 'time'
     return forecasts.slice 0, 8

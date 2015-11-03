@@ -7,6 +7,8 @@ define [
 
   initialize: (options) ->
     @options = options
+
+    @listenTo @model, 'sync', @refresh
     do @render
     do @chart
 
@@ -16,7 +18,6 @@ define [
   chart: ->
     Chart.defaults.global.responsive = false
     ctx = @$('.chart canvas')[0].getContext("2d")
-
     data = 
       labels: @labels()
       datasets: [
@@ -29,21 +30,25 @@ define [
         data: @data()
       ]
 
-    new Chart(ctx).Bar(data, {"barValueSpacing": 0})
+    @barchart = new Chart(ctx).Bar(data, {"barValueSpacing": 0})
+
+  refresh: ->
+    #Destroy the bar chart and redraw
+    do @barchart.destroy
+    do @chart
+
 
   labels: ->
-    _.chain @model
-      .sortBy (val) ->
-        val.time
-      .pluck 'time'
-      .map (val) ->
-        val.substring(11,13)
+    @model
+      .chain()
+      .sortBy (val) -> val.get('time')
+      .map (val) -> val.get('time').substring(11,13)
       .value()
 
   data: ->
-    _.chain @model
-      .sortBy (val) ->
-        val.time
-      .pluck 'value'
+    @model
+      .chain()
+      .sortBy (val) -> val.get 'time'
+      .map (val) -> val.get 'value'
       .value()
 
