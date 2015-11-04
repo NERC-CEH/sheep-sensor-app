@@ -2,9 +2,8 @@ define [
   "jquery"
   "backbone"
   "tpl!templates/GaugeScaffolding.tpl"
-  "views/ChartView"
   "gauge"
-], ($, Backbone, scaffolding, ChartView, Gauge) -> Backbone.View.extend
+], ($, Backbone, scaffolding, Gauge) -> Backbone.View.extend
 
   initialize: (options) ->
     @options = options

@@ -1,11 +1,10 @@
 define [
   "jquery"
   "backbone"
-  "cs!views/RiskForecastView"
   "cs!views/ChartView"
   "cs!views/GaugeView"
   "tpl!templates/AppScaffolding.tpl"
-], ($, Backbone, RiskForecastView, ChartView, GaugeView, scaffolding) -> Backbone.View.extend
+], ($, Backbone, ChartView, GaugeView, scaffolding) -> Backbone.View.extend
   el: '#main'
 
   initialize: ->

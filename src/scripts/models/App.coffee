@@ -17,7 +17,6 @@ define [
     @forecastData = new EnvironmentalMeasurements
     @pollutionRiskData = new EnvironmentalMeasurements
     @pollutionRiskForecastData = new EnvironmentalMeasurements
-
     @currentPollutionRisk = new Risk
     @forecastPollutionRisk = new Risk
     @listenTo @forecastData, 'sync', @updateForecastDependencies
