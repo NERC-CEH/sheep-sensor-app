@@ -9,6 +9,7 @@ define [
     @options = options
 
     @listenTo @model, 'sync', @refresh
+    @listenTo @model, 'add', @refresh
     do @render
     do @chart
 
