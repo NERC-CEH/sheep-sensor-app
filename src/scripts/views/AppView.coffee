@@ -56,5 +56,5 @@ define [
     @forecasts = new ChartView
       model: @model.forecastData
       el: @$('#forecasts')
-      title: "Live met office rainfall forecast for next 24 hours (mm/3 hours)"
+      title: "Live met office rainfall forecast for next 24 hours (probability per 3 hours)"
       img: 'rain'
