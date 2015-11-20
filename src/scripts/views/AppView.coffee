@@ -16,12 +16,12 @@ define [
     @currentGauge = new GaugeView
       model: @model.currentPollutionRisk
       el: @$('#currentGauge')
-      title: 'Current risk of a pollution event: '
+      title: 'Current pollution event risk: '
     
     @currentChart = new ChartView
       model: @model.pollutionRiskData
       el: @$('#currentChart')
-      title: 'Pollution risk during the last 24 hours'
+      title: 'Predicted probablity of pollution events in the last 24 hours'
       img: 'sheep'
 
     @forecastGauge = new GaugeView
@@ -32,7 +32,7 @@ define [
     @forecastChart = new ChartView
       model: @model.pollutionRiskForecastData
       el: @$('#forecastChart')
-      title: 'Predicted pollution risk for next 24 hours'
+      title: 'Pollution event risks during next 24 hours'
       img: 'sheep'
     
     @rainfall = new ChartView
@@ -56,5 +56,5 @@ define [
     @forecasts = new ChartView
       model: @model.forecastData
       el: @$('#forecasts')
-      title: "Rainfall forecast for next 24 hours (mm/3 hours)"
+      title: "Live met office rainfall forecast for next 24 hours (mm/3 hours)"
       img: 'rain'
