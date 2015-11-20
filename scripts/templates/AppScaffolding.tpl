@@ -30,7 +30,7 @@
 
         <div class="panel panel-success chart">
           <div class="panel-heading">
-            <img src="/img/sheep.png">Soil temperature from multiple depths
+            <img src="img/sheep.png">Soil temperature from multiple depths
           </div>
           <div class="panel-body">
             <iframe width="450" height="360" style="border: 1px solid #cccccc;" src="http://api.thingspeak.com/apps/matlab_visualizations/34647" ></iframe>
@@ -40,7 +40,7 @@
       <div class="col-lg-6">
         <div class="panel panel-success chart">
           <div class="panel-heading">
-            <img src="/img/rain.png">Demo of embedding Thingspeak: Conwy met station data for soil temp at 2(cm??)
+            <img src="img/rain.png">Demo of embedding Thingspeak: Conwy met station data for soil temp at 2(cm??)
           </div>
           <div class="panel-body">
             <iframe width="450" height="260" style="border: 1px solid #cccccc;" src="http://api.thingspeak.com/channels/66820/charts/3?width=450&height=260&results=60&dynamic=true" ></iframe>
@@ -53,7 +53,7 @@
 
         <div class="panel panel-success chart">
           <div class="panel-heading">
-            <img src="/img/sheep.png">Demo of embedding Thingspeak chart (just quick grab of x and y from acc sensors)
+            <img src="img/sheep.png">Demo of embedding Thingspeak chart (just quick grab of x and y from acc sensors)
           </div>
           <div class="panel-body">
               <iframe width="450" height="380" style="border: 1px solid #cccccc;" src="http://api.thingspeak.com/apps/matlab_visualizations/34467" ></iframe>
