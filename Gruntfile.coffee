@@ -1,9 +1,7 @@
 module.exports = (grunt)->
   #Load grunt tasks
   grunt.loadNpmTasks 'grunt-gh-pages'
-  grunt.loadNpmTasks 'grunt-contrib-jshint'
   grunt.loadNpmTasks 'grunt-contrib-requirejs'
-  grunt.loadNpmTasks 'grunt-contrib-jasmine'
   grunt.loadNpmTasks 'grunt-contrib-copy'
   grunt.loadNpmTasks 'grunt-contrib-connect'
   grunt.loadNpmTasks 'grunt-contrib-clean'
@@ -13,19 +11,6 @@ module.exports = (grunt)->
 
   #Configure tasks
   grunt.initConfig
-    jshint: 
-      all: ['src/scripts/**/*.js', 'test/**/*.js']
-
-    jasmine:
-      test:
-        options :
-          specs : 'test/**/*spec.js'
-          template: require 'grunt-template-jasmine-requirejs'
-          templateOptions: 
-            requireConfigFile: 'src/scripts/main.js'
-            requireConfig: baseUrl: 'src/scripts' 
-          junit : path : 'junit' 
-
     requirejs: 
       compile: 
         options:
@@ -62,9 +47,6 @@ module.exports = (grunt)->
         user:
           name: 'Bamboo',
           email: 'bamboo@ceh.ac.uk'
-      qa:   
-        options: branch: 'qa-pages'
-        src: '**/*'
       prod: src: '**/*'
  
     connect: 
@@ -75,9 +57,7 @@ module.exports = (grunt)->
     require('bower').commands.install().on('end', do @async)
 
   grunt.registerTask 'prep', ['clean', 'bower-install']
-  grunt.registerTask 'test', ['jshint', 'jasmine']
   grunt.registerTask 'develop', ['connect', 'less', 'watch']
-  grunt.registerTask 'build', ['less', 'test', 'copy', 'cssmin', 'requirejs']
+  grunt.registerTask 'build', ['less', 'copy', 'cssmin', 'requirejs']
   grunt.registerTask 'publish-prod', ['build', 'gh-pages:prod']
-  grunt.registerTask 'publish-qa', ['build', 'gh-pages:qa']
   grunt.registerTask 'default', ['prep', 'build'] #register the default task as build
